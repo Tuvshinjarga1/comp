@@ -25,7 +25,6 @@ Backend:
 - api.py              : FastAPI сервер, REST API endpoints
 - database.py          : PostgreSQL холболт, query функцүүд
 - ai_agent.py          : AI агент, асуулт боловсруулах
-- config.py            : Тохиргоо (database, API keys)
 - mcp_server.py        : MCP сервер (SDK ашиглах)
 - mcp_server_simple.py : Энгийн MCP сервер (SDK шаардахгүй)
 - run.py               : Серверийг ажиллуулах
@@ -38,11 +37,8 @@ Frontend:
 
 Utilities:
 ----------
-- test_connection.py   : Database холболт шалгах
 - requirements.txt     : Python dependencies
-- setup_instructions.txt : Дэлгэрэнгүй заавар
 - mcp_config.json      : MCP тохиргоо
-- start.bat / start.sh  : Ажиллуулах скрипт
 
 ================================================================================
 ҮНДСЭН ФУНКЦИОНАЛУУД
