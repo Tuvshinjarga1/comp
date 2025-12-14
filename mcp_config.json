@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "retail-beverage-assistant": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "env": {
+        "DATABASE_HOST": "13.214.153.0",
+        "DATABASE_PORT": "5432",
+        "DATABASE_USER": "postgres",
+        "DATABASE_PASSWORD": "PasswordDotaafdb",
+        "DATABASE_NAME": "postgres",
+        "GEMINI_API_KEY": ""
+      }
+    }
+  }
+}

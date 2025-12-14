@@ -1,0 +1,214 @@
+================================================================================
+RETAIL BEVERAGE AI ASSISTANT - ТӨСЛИЙН ХУРААНГУЙ
+================================================================================
+
+ЭНЭ ТӨСӨЛ ЮУ ХИЙСЭН БЭ?
+================================================================================
+
+Retail Beverage Ordering системд холбогдож, бизнесийн мэдээлэл өгөх AI туслах
+бүтээсэн. Энэ систем нь:
+
+1. ✅ MCP (Model Context Protocol) интеграци
+2. ✅ PostgreSQL database холболт
+3. ✅ Байгалийн хэл дээрх асуултуудыг ойлгох
+4. ✅ Борлуулалтын мэдээлэл авах (SKU, merchant, district, цаг хугацаа, sales rep)
+5. ✅ Insights үүсгэх (top SKU, trends, patterns)
+6. ✅ Web UI (chat interface)
+7. ✅ RESTful API
+
+================================================================================
+ФАЙЛУУДЫН БҮТЭЦ
+================================================================================
+
+Backend:
+---------
+- api.py              : FastAPI сервер, REST API endpoints
+- database.py          : PostgreSQL холболт, query функцүүд
+- ai_agent.py          : AI агент, асуулт боловсруулах
+- config.py            : Тохиргоо (database, API keys)
+- mcp_server.py        : MCP сервер (SDK ашиглах)
+- mcp_server_simple.py : Энгийн MCP сервер (SDK шаардахгүй)
+- run.py               : Серверийг ажиллуулах
+
+Frontend:
+---------
+- static/index.html    : Chat UI HTML
+- static/style.css     : CSS стил
+- static/script.js     : JavaScript (API холболт)
+
+Utilities:
+----------
+- test_connection.py   : Database холболт шалгах
+- requirements.txt     : Python dependencies
+- setup_instructions.txt : Дэлгэрэнгүй заавар
+- mcp_config.json      : MCP тохиргоо
+- start.bat / start.sh  : Ажиллуулах скрипт
+
+================================================================================
+ҮНДСЭН ФУНКЦИОНАЛУУД
+================================================================================
+
+1. БОРЛУУЛАЛТЫН МЭДЭЭЛЭЛ:
+   ✓ SKU-аар борлуулалт
+   ✓ Merchant-аар борлуулалт
+   ✓ District-аар борлуулалт
+   ✓ Цаг хугацааны дагуу (өдөр/долоо хоног/сар)
+   ✓ Sales rep гүйцэтгэл
+
+2. INSIGHTS:
+   ✓ Хамгийн их борлуулалттай SKU-ууд
+   ✓ District-ийн чиг хандлага
+   ✓ Категори-ийн хураангуй
+   ✓ Merchant захиалгын хэв маяг
+
+3. БАЙГАЛИЙН ХЭЛ:
+   ✓ Монгол болон Англи хэл дээрх асуултууд
+   ✓ Ойлгомжтой хариу
+   ✓ Insights автоматаар үүсгэх
+
+================================================================================
+ХЭРХЭН АЖИЛЛУУЛАХ
+================================================================================
+
+1. DEPENDENCIES СУУЛГАХ:
+   pip install -r requirements.txt
+
+2. ENVIRONMENT VARIABLES:
+   .env файл үүсгэх:
+   GEMINI_API_KEY=your_gemini_api_key_here
+   (Gemini API key авах: https://makersuite.google.com/app/apikey)
+   (Database тохиргоо аль хэдийн config.py-д байна)
+
+3. DATABASE ШАЛГАХ:
+   python test_connection.py
+
+4. СЕРВЕРИЙГ АЖИЛЛУУЛАХ:
+   python run.py
+   эсвэл: start.bat (Windows) / start.sh (Linux/Mac)
+
+5. WEB UI НЭЭХ:
+   http://localhost:8000/chat
+
+================================================================================
+API ENDPOINTS
+================================================================================
+
+POST /api/query
+   Байгалийн хэл дээрх асуултанд хариулах
+   Body: {"question": "Хамгийн их борлуулалттай SKU-ууд юу вэ?"}
+
+POST /api/sales/sku
+   SKU-аар борлуулалт
+
+POST /api/sales/merchant
+   Merchant-аар борлуулалт
+
+POST /api/sales/district
+   District-аар борлуулалт
+
+POST /api/sales/time-period
+   Цаг хугацааны дагуу борлуулалт
+
+POST /api/sales/sales-rep
+   Sales rep гүйцэтгэл
+
+GET /api/insights/top-skus
+   Top SKU-ууд
+
+GET /api/insights/district-trends
+   District trends
+
+GET /api/insights/category-summary
+   Category summary
+
+GET /api/insights/merchant-patterns
+   Merchant ordering patterns
+
+================================================================================
+MCP ИНТЕГРАЦИ
+================================================================================
+
+MCP сервер 2 хувилбартай:
+
+1. mcp_server.py - MCP SDK ашиглах (mcp package шаардлагатай)
+2. mcp_server_simple.py - Энгийн JSON-RPC протокол
+
+MCP client-д холбох:
+- mcp_config.json файлыг ашиглах
+- Эсвэл шууд: python mcp_server_simple.py
+
+================================================================================
+АСУУЛТУУДЫН ЖИШЭЭ
+================================================================================
+
+1. "Хамгийн их борлуулалттай SKU-ууд юу вэ?"
+2. "District-ийн борлуулалтын чиг хандлага хэд вэ?"
+3. "Энэ сарын борлуулалт хэд вэ?"
+4. "Sales rep-ийн гүйцэтгэл хэрхэн байна?"
+5. "Merchant ID 5-ийн борлуулалт хэд вэ?"
+6. "SKU ID 10-ийн борлуулалт хэд вэ?"
+7. "Категори-ийн хураангуй хэд вэ?"
+
+================================================================================
+ТЕХНИКИЙН ДЭЛГЭРЭНГҮЙ
+================================================================================
+
+Tech Stack:
+-----------
+- Backend: Python 3.8+, FastAPI, Uvicorn
+- Database: PostgreSQL (psycopg2)
+- AI: Google Gemini Pro, google-generativeai
+- Frontend: HTML, CSS, JavaScript (Vanilla)
+- MCP: Model Context Protocol
+
+Database Schema (Хүлээгдэж буй):
+---------------------------------
+- merchants (id, name, district)
+- sku (id, name, category)
+- orders (id, merchant_id, sales_rep_id, order_date)
+- order_items (id, order_id, sku_id, quantity, price)
+- sales_reps (id, name)
+
+================================================================================
+HACKATHON ШИЙДЛҮҮД
+================================================================================
+
+✅ Core Questions Accuracy (40 pts)
+   - Бүх үндсэн асуултууд дэмжигдсэн
+   - SKU, merchant, district, time period, sales rep
+
+✅ Ease of Use (25 pts)
+   - Энгийн chat interface
+   - Байгалийн хэл дэмжих
+   - Түргэн асуултууд
+
+✅ Data Insightfulness (25 pts)
+   - Top SKU, trends, patterns
+   - LLM ашиглан insights үүсгэх
+   - Ойлгомжтой тайлбар
+
+✅ Build Stability (10 pts)
+   - Алдааны боловсруулалт
+   - Database холболт найдвартай
+   - Error handling
+
+================================================================================
+БОНУС ФУНКЦИОНАЛУУД (Ирээдүйд нэмэх боломжтой)
+================================================================================
+
+- Demand forecasting
+- Basket affinity insights
+- Weather/event correlations
+- Merchant recommendations
+- Sales rep coaching insights
+
+================================================================================
+ХОЛБООС
+================================================================================
+
+Web UI: http://localhost:8000/chat
+API Docs: http://localhost:8000/docs (FastAPI auto-generated)
+API Root: http://localhost:8000/
+
+================================================================================
+

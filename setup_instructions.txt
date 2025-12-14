@@ -1,0 +1,121 @@
+================================================================================
+RETAIL BEVERAGE AI ASSISTANT - СУУЛГАЛТЫН ЗААВАР
+================================================================================
+
+1. PYTHON СУУЛГАХ
+   - Python 3.8+ шаардлагатай
+   - https://www.python.org/downloads/ -аас татаж авах
+
+2. DEPENDENCIES СУУЛГАХ
+   PowerShell эсвэл Command Prompt дээр:
+   
+   pip install -r requirements.txt
+
+3. ENVIRONMENT VARIABLES ТОХИРУУЛАХ
+   .env файл үүсгэх (эсвэл .env.example-ийг хуулж нэр солих):
+   
+   DATABASE_HOST=13.214.153.0
+   DATABASE_PORT=5432
+   DATABASE_USER=postgres
+   DATABASE_PASSWORD=PasswordDotaafdb
+   DATABASE_NAME=postgres
+   GEMINI_API_KEY=your_gemini_api_key_here
+
+   ⚠ GEMINI_API_KEY-г заавал тохируулах хэрэгтэй!
+   Gemini API key авах: https://makersuite.google.com/app/apikey
+
+4. DATABASE ХОЛБОЛТ ШАЛГАХ
+   
+   python test_connection.py
+
+5. СЕРВЕРИЙГ АЖИЛЛУУЛАХ
+   
+   python run.py
+
+6. WEB UI НЭЭХ
+   Браузер дээр нээх:
+   
+   http://localhost:8000/chat
+
+7. MCP SERVER АЖИЛЛУУЛАХ (Сонголт)
+   MCP client-д холбохын тулд:
+   
+   python mcp_server.py
+
+================================================================================
+API ENDPOINTS
+================================================================================
+
+POST /api/query
+   - Байгалийн хэл дээрх асуултанд хариулах
+   Body: {"question": "Хамгийн их борлуулалттай SKU-ууд юу вэ?"}
+
+POST /api/sales/sku
+   - SKU-аар борлуулалт
+   Body: {"sku_id": 1, "start_date": "2024-01-01", "end_date": "2024-12-31"}
+
+POST /api/sales/merchant
+   - Merchant-аар борлуулалт
+   Body: {"merchant_id": 1, "start_date": "2024-01-01", "end_date": "2024-12-31"}
+
+POST /api/sales/district
+   - District-аар борлуулалт
+   Body: {"district": "Ulaanbaatar", "start_date": "2024-01-01", "end_date": "2024-12-31"}
+
+POST /api/sales/time-period
+   - Цаг хугацааны дагуу борлуулалт
+   Body: {"period": "monthly", "start_date": "2024-01-01", "end_date": "2024-12-31"}
+
+POST /api/sales/sales-rep
+   - Sales rep гүйцэтгэл
+   Body: {"sales_rep_id": 1, "start_date": "2024-01-01", "end_date": "2024-12-31"}
+
+GET /api/insights/top-skus?limit=10&start_date=2024-01-01&end_date=2024-12-31
+   - Top SKU-ууд
+
+GET /api/insights/district-trends?start_date=2024-01-01&end_date=2024-12-31
+   - District trends
+
+GET /api/insights/category-summary?start_date=2024-01-01&end_date=2024-12-31
+   - Category summary
+
+GET /api/insights/merchant-patterns?merchant_id=1
+   - Merchant ordering patterns
+
+================================================================================
+АСУУЛТУУДЫН ЖИШЭЭ
+================================================================================
+
+1. "Хамгийн их борлуулалттай SKU-ууд юу вэ?"
+2. "District-ийн борлуулалтын чиг хандлага хэд вэ?"
+3. "Энэ сарын борлуулалт хэд вэ?"
+4. "Sales rep-ийн гүйцэтгэл хэрхэн байна?"
+5. "Merchant ID 5-ийн борлуулалт хэд вэ?"
+6. "SKU ID 10-ийн борлуулалт хэд вэ?"
+7. "Категори-ийн хураангуй хэд вэ?"
+
+================================================================================
+ALDAANII TULHUR
+================================================================================
+
+1. Database холболт алдаатай:
+   - test_connection.py ажиллуулж шалгах
+   - Firewall/network шалгах
+   - Credentials зөв эсэх шалгах
+
+2. Gemini API алдаа:
+   - GEMINI_API_KEY зөв эсэх шалгах
+   - API key идэвхтэй эсэх шалгах
+   - Интернет холболт шалгах
+   - Gemini API key: https://makersuite.google.com/app/apikey
+
+3. Module not found:
+   - pip install -r requirements.txt дахин ажиллуулах
+   - Virtual environment ашиглах зөвлөмж
+
+4. Port already in use:
+   - Өөр port ашиглах: uvicorn.run(app, port=8001)
+   - Эсвэл ажиллаж буй процесс хаах
+
+================================================================================
+

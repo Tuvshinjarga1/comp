@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retail Beverage AI Assistant</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🍺 Retail Beverage AI Assistant</h1>
+        <p>Бизнесийн мэдээлэл авах AI туслах</p>
+      </header>
+
+      <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            <div class="message-content">
+              <strong>AI Туслах:</strong> Сайн байна уу! Би танд бизнесийн
+              мэдээлэл өгөхөд туслах болно. Та асуултаа байгалийн хэлээр асууж
+              болно, жишээ нь:
+              <ul>
+                <li>"Хамгийн их борлуулалттай SKU-ууд юу вэ?"</li>
+                <li>"District-ийн борлуулалтын чиг хандлага хэд вэ?"</li>
+                <li>"Sales rep-ийн гүйцэтгэл хэрхэн байна?"</li>
+                <li>"Энэ сарын борлуулалт хэд вэ?"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-container">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Асуултаа энд бичнэ үү..."
+            autocomplete="off"
+          />
+          <button id="sendButton">Илгээх</button>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <h3>Түргэн асуултууд:</h3>
+        <div class="action-buttons">
+          <button
+            class="quick-btn"
+            data-query="Хамгийн их борлуулалттай SKU-ууд"
+          >
+            Top SKU
+          </button>
+          <button class="quick-btn" data-query="District-ийн чиг хандлага">
+            District Trends
+          </button>
+          <button class="quick-btn" data-query="Категори-ийн хураангуй">
+            Category Summary
+          </button>
+          <button class="quick-btn" data-query="Энэ сарын борлуулалт">
+            Энэ сар
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
