@@ -9,7 +9,9 @@ from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 from database import db
 from ai_agent import BusinessAIAgent
-from config import config
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import json
 
 app = FastAPI(title="Retail Beverage AI Assistant")
@@ -38,7 +40,7 @@ async def connection_error_handler(request, exc):
     )
 
 # AI agent үүсгэх
-agent = BusinessAIAgent(config.GEMINI_API_KEY)
+agent = BusinessAIAgent(os.getenv("GEMINI_API_KEY", ""))
 
 # Request models
 class QueryRequest(BaseModel):

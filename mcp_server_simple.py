@@ -6,10 +6,12 @@ import json
 import sys
 from database import db
 from ai_agent import BusinessAIAgent
-from config import config
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # AI agent үүсгэх
-agent = BusinessAIAgent(config.GEMINI_API_KEY)
+agent = BusinessAIAgent(os.getenv("GEMINI_API_KEY", ""))
 
 def handle_request(request):
     """Request боловсруулах"""

@@ -10,13 +10,15 @@ from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 from database import db
 from ai_agent import BusinessAIAgent
-from config import config
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # MCP сервер үүсгэх
 server = Server("retail-beverage-assistant")
 
 # AI agent үүсгэх
-agent = BusinessAIAgent(config.GEMINI_API_KEY)
+agent = BusinessAIAgent(os.getenv("GEMINI_API_KEY", ""))
 
 @server.list_tools()
 async def list_tools() -> list[Tool]:

@@ -1,7 +1,9 @@
 import psycopg2
 import psycopg2.extras
 from typing import List, Dict, Any, Optional
-from config import config
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Database:
     def __init__(self):
@@ -23,11 +25,11 @@ class Database:
         """PostgreSQL холболт үүсгэх"""
         try:
             self.conn = psycopg2.connect(
-                host=config.DATABASE_HOST,
-                port=config.DATABASE_PORT,
-                user=config.DATABASE_USER,
-                password=config.DATABASE_PASSWORD,
-                database=config.DATABASE_NAME,
+                host=os.getenv("DATABASE_HOST"),
+                port=os.getenv("DATABASE_PORT"),
+                user=os.getenv("DATABASE_USER"),
+                password=os.getenv("DATABASE_PASSWORD"),
+                database=os.getenv("DATABASE_NAME"),
                 connect_timeout=5  # 5 секундын timeout
             )
             self._connected = True
